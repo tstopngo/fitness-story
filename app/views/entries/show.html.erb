@@ -1,16 +1,15 @@
-<h2><%=@entry.date_time%></h2>
+<h2><%= @entry.created_at%></h2>
 <div id="<%= @entry.id %>" class="entry">
-  <ul>
-    <li> @entry.user_id </li>
-    <li> @entry.date_time </li>
-    <li> @entry.workout_calories </li>
-    <li> @entry.food_calories </li>
-    <li> @entry.net_calrories </li>
-    <li> @entry.food </li>
-  </ul>
-<form action="/entries/<%=@entry.id%>/delete" method="post">
-  <input type="hidden" name="_method" value="delete" id="hidden">
-  <input type="submit" value="Delete Tweet">
-</form>
-<a href="/entries/<%=@entry.id%>/edit"><button type="button" name="button">Edit Entry</a></button>
+    <li> By:  <%=@entry.user.username %></li>
+    <li> Workout Calories: <%= @entry.workout_calories %> </li>
+    <li> Food Calories: <%= @entry.food_calories %></li>
+    <li> Net Calories: <%= @entry.net_calories %> </li>
+    <li> Food: <%= @entry.food %> </li>
+  <button><form action="/entries/<%=@entry.id%>/delete" method="post">
+    <input type="hidden" name="_method" value="delete" id="hidden">
+    <input type="submit" value="Delete Entry">
+  </form></button>
+  <br>
+  <br>
+  <a href="/entries/<%=@entry.id%>/edit"><button type="button" name="button">Edit Entry</button></a>
 </div>

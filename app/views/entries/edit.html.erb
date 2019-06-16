@@ -1,11 +1,11 @@
 <h1>Edit Entry</h1>
-<form action="/entries/<%=@entry.date_time%>" method="post">
+<form action="/entries/<%=@entry.id%>" method="post">
   <input type="hidden" name="_method" value="PATCH" id="hidden">
   <label for="workout_calories">Work Out Calories</label>
   <input type="text" name="workout_calories" value="<%=@entry.workout_calories%>" id ="workout_calories">
-  <label for="workout_calories">Food Calories</label>
-  <input type="text" name="food_calories" value="<%=@entry.workout_calories%>" id ="food_calories">
-  <label for="workout_calories">Food List</label>
-  <input type="text" name="food" value="<%=@entry.workout_calories%>" id ="food">
+  <label for="food_calories">Food Calories</label>
+  <input type="text" name="food_calories" value="<%=@entry.food_calories%>" id ="food_calories">
+  <label for="food">Food List</label>
+  <input type="text" name="food" value="<%=@entry.food%>" id ="food">
   <input type="submit" id = "submit" value="submit">
 </form>

@@ -20,10 +20,11 @@ class EntriesController < ApplicationController
     if !logged_in?
       redirect "/login"
     else
-        if params.values.each.empty?
+        if params.values.each.include?("")
           redirect "/entries/new"
         else
-          @entry = Entry.create(:workout_calories => params[:workout_calories], :food_calories => params[:food_calories], :net_calrories => (params[:food_calories]-params[:workout_calories]), :food => params[:food], :user_id => current_user.id)
+          net_calories = params[:food_calories].to_i - params[:workout_calories].to_i
+          @entry = Entry.create(:workout_calories => params[:workout_calories].to_i, :food_calories => params[:food_calories].to_i, :net_calories => net_calories, :food => params[:food], :user_id => current_user.id)
           redirect "/entries/#{@entry.id}"
         end
       redirect "/entries"
@@ -37,19 +38,20 @@ class EntriesController < ApplicationController
     else
       @entry = Entry.find_by_id(params[:id])
       erb :"/entries/show.html"
+    end
   end
 
   # GET: /entries/5/edit
   get "/entries/:id/edit" do
     if !logged_in?
     redirect '/login'
-  else
-    @entry = Entry.find_by_id(params[:id])
-      if @entry && @entry.user == current_user
-        erb :"/entries/edit.html"
-      else
-        redirect "/users/#{@entry.user.username}"
-      end
+    else
+      @entry = Entry.find_by_id(params[:id])
+        if @entry && @entry.user == current_user
+          erb :"/entries/edit.html"
+        else
+          redirect "/users/#{@entry.user.username}"
+        end
     end
   end
 
@@ -59,14 +61,14 @@ class EntriesController < ApplicationController
       redirect '/login'
     else
       @entry = Entry.find_by_id(params[:id])
-      if params.values.each.empty?
+      if params.values.each.include?("")
         redirect to "/entries/#{@entry.id}/edit"
       else
           if @entry && @entry.user == current_user
-            @entry.update(:workout_calories => params[:workout_calories], :food_calories => params[:food_calories], :net_calrories => (params[:food_calories]-params[:workout_calories]), :food => params[:food])
+            @entry.update(:workout_calories => params[:workout_calories].to_i, :food_calories => params[:food_calories].to_i, :net_calories => (params[:food_calories].to_i-params[:workout_calories].to_i), :food => params[:food])
           end
       end
-      redirect "/entries/#{@entry.id}/edit"
+      redirect "/entries/#{@entry.id}"
     end
   end
 
