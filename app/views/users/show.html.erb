@@ -13,9 +13,14 @@
   <a href="#"><i class="fa fa-linkedin"></i></a>
   <a href="#"><i class="fa fa-facebook"></i></a>
   <p><a href="/users/<%=@user.username%>/edit"><button>Edit Profile</button></a></p>
-  <p><a href="/entries/new"><button>New Log</button></a></p>
+  <% if current_user.id == @user.id  %>
+    <p><a href="/entries/new"><button>New Log</button></a></p>
+  <% end %>
   <p><a href="/logout"><button>Log Out</button></a></p>
 </div>
+
+
+
 
 <div class="entries">
 

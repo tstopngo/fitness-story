@@ -1,8 +1,16 @@
-<p><%=@entry.date_time%></p>
-
+<h2><%=@entry.date_time%></h2>
+<div id="<%= @entry.id %>" class="entry">
+  <ul>
+    <li> @entry.user_id </li>
+    <li> @entry.date_time </li>
+    <li> @entry.workout_calories </li>
+    <li> @entry.food_calories </li>
+    <li> @entry.net_calrories </li>
+    <li> @entry.food </li>
+  </ul>
 <form action="/entries/<%=@entry.id%>/delete" method="post">
   <input type="hidden" name="_method" value="delete" id="hidden">
   <input type="submit" value="Delete Tweet">
 </form>
-
-<a href="/entries/<%=@entry.id%>/edit">Edit Tweet </a>
+<a href="/entries/<%=@entry.id%>/edit"><button type="button" name="button">Edit Entry</a></button>
+</div>
