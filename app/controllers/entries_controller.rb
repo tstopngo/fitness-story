@@ -62,24 +62,24 @@ class EntriesController < ApplicationController
       if params.values.each.empty?
         redirect to "/entries/#{@entry.id}/edit"
       else
-          if @tweet && @tweet.user == current_user
-            @tweet.update(:content => params[:content])
+          if @entry && @entry.user == current_user
+            @entry.update(:workout_calories => params[:workout_calories], :food_calories => params[:food_calories], :net_calrories => (params[:food_calories]-params[:workout_calories]), :food => params[:food])
           end
       end
-      redirect "/tweets/#{@tweet.id}/edit"
+      redirect "/entries/#{@entry.id}/edit"
     end
   end
 
   # DELETE: /entries/5/delete
   delete "/entries/:id/delete" do
-    @tweet = Tweet.find_by_id(params[:id])
+    @entry = Entry.find_by_id(params[:id])
   if !logged_in?
     redirect '/login'
   else
-    if @tweet.user == current_user
-      @tweet.delete
+    if @entry.user == current_user
+      @entry.delete
     end
-  redirect '/tweets'
+  redirect "/users/#{@entry.user.username}"
   end
     redirect "/entries"
   end
