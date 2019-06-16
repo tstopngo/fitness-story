@@ -2,12 +2,17 @@ class EntriesController < ApplicationController
 
   # GET: /entries
   get "/entries" do
+    @entries = Entry.all
     erb :"/entries/index.html"
   end
 
   # GET: /entries/new
   get "/entries/new" do
-    erb :"/entries/new.html"
+    if !logged_in?
+      redirect "/login"
+    else
+      erb :"/entries/new.html"
+    end
   end
 
   # POST: /entries

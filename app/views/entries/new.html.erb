@@ -1,1 +1,11 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h1>Add Entry</h1>
+<form action="/entries>" method="post">
+  <input type="hidden" name="_method" value="PATCH" id="hidden">
+  <label for="workout_calories">WorkOut Calories: </label>
+  <input type="text" name="workout_calories" value="" id ="workout_calories">
+  <label for="workout_calories">Food Calories: </label>
+  <input type="text" name="food_calories" value="" id ="food_calories">
+  <label for="workout_calories">Food List: </label>
+  <input type="text" name="food" value="" id ="food">
+  <input type="submit" id = "submit" value="Submit">
+</form>

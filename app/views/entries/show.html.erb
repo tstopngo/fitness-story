@@ -1,1 +1,8 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<p><%=@entry.date_time%></p>
+
+<form action="/entries/<%=@entry.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete" id="hidden">
+  <input type="submit" value="Delete Tweet">
+</form>
+
+<a href="/entries/<%=@entry.id%>/edit">Edit Tweet </a>
