@@ -1,4 +1,5 @@
 <h1>Profile Page</h1>
+<h2><a href="/users/<%=current_user.username%>">Home</h2></a>
 <br>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap">
@@ -12,11 +13,13 @@
   <a href="#"><i class="fa fa-twitter"></i></a>
   <a href="#"><i class="fa fa-linkedin"></i></a>
   <a href="#"><i class="fa fa-facebook"></i></a>
-  <p><a href="/users/<%=@user.username%>/edit"><button>Edit Profile</button></a></p>
+  <p><a href="/entries"><button>All Entries</button></a></p>
   <% if current_user.id == @user.id  %>
+  <p><a href="/users/<%=@user.username%>/edit"><button>Edit Profile</button></a></p>
     <p><a href="/entries/new"><button>New Log</button></a></p>
+    <p><a href="/logout"><button>Log Out</button></a></p>
   <% end %>
-  <p><a href="/logout"><button>Log Out</button></a></p>
+
 </div>
 
 
@@ -30,6 +33,10 @@
       <li> Net Calories: <%= entry.net_calories %> </li>
       <li> Food: <%= entry.food %> </li>
     </ul>
+    <br>
+    <% if current_user.id == @user.id  %>
+    <p><a href="/entries/<%=entry.id%>/edit"> Edit Entry </a></p>
+    <% end %>
   </div>
   <br>
   <br>

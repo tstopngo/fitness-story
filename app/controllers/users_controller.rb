@@ -86,11 +86,11 @@ class UsersController < ApplicationController
       redirect '/login'
     else
       @user = User.find_by_slug(params[:id])
-      if params[:username].empty?
-        redirect to "/tweets/#{@tweet.id}/edit"
+      if params[:email].empty?
+        redirect to "/users/#{@user.id}/edit"
       else
           if @user == current_user
-            @user.update(:username => params[:username])
+            @user.update(:email => params[:email])
           end
       end
     redirect "/users/#{@user.username}"

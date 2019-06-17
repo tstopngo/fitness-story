@@ -2,7 +2,7 @@
 <% @entries.each do |entry|%>
   <div id="<%= entry.id%>" class="entry">
     <ul>
-      <li> By:  <%= entry.user.username %></li>
+      <a href="/users/<%=entry.user.username%>"><li> By:  <%= entry.user.username %></li></a>
       <li> Workout Calories: <%= entry.workout_calories %> </li>
       <li> Food Calories: <%= entry.food_calories %></li>
       <li> Net Calories: <%= entry.net_calories %> </li>
