@@ -10,6 +10,15 @@ class UsersController < ApplicationController
     end
   end
 
+  get "/loginexisting" do
+    if logged_in?
+      current_user
+      redirect "/users/#{current_user.username}"
+    else
+      erb :"/users/loginexisting.html"
+    end
+  end
+
   # POST: /login
   post "/login" do
     @user = User.find_by(:username => params[:username])
@@ -33,19 +42,27 @@ class UsersController < ApplicationController
   # POST: /users/new
   post "/users/new" do
     if params.values.each.include?("")
-        redirect '/signup'
+        redirect '/users/new'
+    else
+      if User.find_by_slug(params[:username]) || User.find_by(:email => params[:email])
+          redirect '/loginexisting'
       else
         @user = User.create(:email => params[:email], :username => params[:username], :password => params[:password], :title => "Noob", :exp => 500)
         session[:user_id] = @user.id
         @user.authenticate(params[:password])
         redirect "users/#{@user.username}"
       end
+    end
   end
 
   # GET: /users/username
   get "/users/:id" do
-    @user = User.find_by_slug(params[:id])
-    erb :"/users/show.html"
+    if !logged_in?
+      redirect '/'
+    else
+      @user = User.find_by_slug(params[:id])
+      erb :"/users/show.html"
+    end
   end
 
   # GET: /users/5/edit
