@@ -61,6 +61,8 @@ class UsersController < ApplicationController
       redirect '/'
     else
       @user = User.find_by_slug(params[:id])
+      @entries = Entry.all
+      @user_entries = Entry.all.map {|entry| entry.user.username == @user.username}
       erb :"/users/show.html"
     end
   end
