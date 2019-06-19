@@ -13,7 +13,7 @@ Download this repository and run 'bundle install'
 
 1. Create An Account
 2. Log in and out of the account
-3. Create, Read, Update, and Delete Health Entries
+3. Create, Read, Update, and Delete Entries
 4. View other user's entries
 
 ## Contributing
